@@ -41,11 +41,20 @@ public class UserController {
 
     @GetMapping("/findByPage")
     @ResponseBody
-    public Page<User> findByPage(Integer page, Integer size,  @ModelAttribute("user")  User user, HttpServletRequest request){
+    public Page<User> findByPage(Integer page, Integer size,  @ModelAttribute("user")  User user){
         System.out.println("findByUserName user name="+user.getUserName());
         return userService.findCriteria(page,size,user);
 //        return userService.findNoCriteria(page,size);
     }
+
+    @GetMapping("/findAll")
+    @ResponseBody
+    public List<User> findAll(User user){
+        System.out.println("findByUserName user name="+user.getUserName());
+//        return userService.findAll(user);
+        return userService.findAll2(user);
+    }
+
 
     @PutMapping("/save")
     @ResponseBody

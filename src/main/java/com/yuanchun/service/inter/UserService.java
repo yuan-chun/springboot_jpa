@@ -17,4 +17,8 @@ public interface UserService {
     Page<User> findNoCriteria(Integer page, Integer size) ;
 
     Page<User> findCriteria(Integer page, Integer size, User user);
+
+    List<User> findAll(User user);
+
+    List<User> findAll2(User user);
 }
