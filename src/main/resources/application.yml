@@ -22,3 +22,6 @@
 #logging:
 #  level:
 #    ROOT: INFO
+#server:
+#  servlet:
+#    context-path: /context_path

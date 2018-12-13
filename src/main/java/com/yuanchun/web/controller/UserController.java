@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
@@ -14,16 +15,26 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/findByUserName")
+    @GetMapping("/findByUserName")
     @ResponseBody
-    public User findByUserName(@RequestBody User user){
-        return userService.findByUserName(user.getUserName());
+    public User findByUserName( String userName){
+        System.out.println("findByUserName user name"+userName);
+        return userService.findByUserName(userName);
+    }
+
+    @GetMapping("/findLikeName")
+    @ResponseBody
+    public List<User> findLikeName(String userName){
+        System.out.println("findByUserName user name"+userName);
+        return userService.findLikeName(userName);
     }
 
     @PutMapping("/save")
     @ResponseBody
-    public void saveUser(@RequestBody User user){
+    public User saveUser(@RequestBody User user){
+        System.out.println("user name"+user.getUserName());
         userService.save(user);
+        return user;
     }
 
     @GetMapping("/index")

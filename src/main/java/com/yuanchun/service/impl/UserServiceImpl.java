@@ -22,6 +22,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> findLikeName(String userName) {
+        List<User> list = userRepository.findByUserNameLike(userName);
+        list.addAll(userRepository.selectByName(userName));
+        return list;
+    }
+
+    @Override
     public void save(User user) {
         userRepository.save(user);
     }

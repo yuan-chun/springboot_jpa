@@ -3,6 +3,8 @@ package com.yuanchun.repo;
 import com.yuanchun.po.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -62,7 +64,9 @@ public interface UserRepository extends JpaRepository<User,Long> , JpaSpecificat
     //NotIn --- 等价于 SQL 中的 "not in"，比如 findByUserNameNotIN(String UserName);
     public List<User> findByUserNameNotIn(String UserName);
 
-
-
+    //利用原生的SQL进行删除操作
+    @Query(value = "select * from  test_user where user_name=?1 ", nativeQuery = true)
+    @Modifying
+    public List<User> selectByName(String name);
 
 }

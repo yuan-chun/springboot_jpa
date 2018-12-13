@@ -1,54 +1,80 @@
 
-function fire_ajax_submit(){
-    // alert("aaaa");
-    // var search = {};
-    // search["userName"] = $('#username').val();
-    // $("#btn-search").prop("disabled", true);
-    // $.ajax({
-    //     type: 'POST',
-    //     contentType: "application/json",
-    //     url: local_web_root + "user/findByUserName",
-    //     data: JSON.stringify(search),
-    //     dataType: 'json',
-    //     cache: false,
-    //     timeout: 600000,
-    //     success: function(data){
-    //         var json = "<h4>Ajax Response</h4><pre>"
-    //             + JSON.stringify(data, null, 4) + "</pre>";
-    //         $('#feedback').html(json);
-    //         console.log("SUCCESS : ", data);
-    //         $("#btn-search").prop("disabled", false);
-    //     },
-    //     error: function(e){
-    //         var json = "<h4>Ajax Response</h4><pre>"
-    //             + e.responseText + "</pre>";
-    //         $('#feedback').html(json);
-    //
-    //         console.log("ERROR : ", e);
-    //         $("#btn-search").prop("disabled", false);
-    //
-    //     }
-    // })
-
-
+function queryByName(){
     var search = {};
-    search["userName"] = $('#username').val();
-    alert(JSON.stringify(search));
+    search["userName"] = $('#userName').val();
     $.ajax({
-        url: "http://localhost:13500/user/findByUserName",
+        // url: "http://localhost:13500/user/findByUserName",
+        url: local_web_root + "/user/findByUserName",
         async: false,
         timeout: 3000,
-        contentType: "application/json",
-        dataType: 'json',
-        type: "POST",
-        data: JSON.stringify(search),
+        contentType: "application/json",//发送给服务器参数类型
+        dataType: 'json',//返回数据类型
+        type: "GET",//get对应data为对象
+        data:search,
         success: function (data) {
-            alert(1)
+            console.log("SUCCESS : ", JSON.stringify(data));
         },
-        error: function () {
-            alert(2)
+        error: function (e) {
+            console.log("ERROR : ", e);
         }
     });
 
 
 }
+function queryLikeName(){
+    var search = {};
+    search["userName"] = $('#userName').val();
+    $.ajax({
+        // url: "http://localhost:13500/user/findByUserName",
+        url: local_web_root + "/user/findLikeName",
+        async: false,
+        timeout: 3000,
+        contentType: "application/json",//发送给服务器参数类型
+        dataType: 'json',//返回数据类型
+        type: "GET",//get对应data为对象
+        data:search,
+        success: function (data) {
+            console.log("SUCCESS : ", JSON.stringify(data));
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+
+
+}
+
+
+
+function save(){
+    var search = {};
+    search["userName"] = $('#userName').val();
+    alert(JSON.stringify(search));
+    $.ajax({
+        // url: "http://localhost:13500/user/findByUserName",
+        url: local_web_root + "/user/save",
+        async: false,
+        timeout: 3000,
+        contentType: "application/json",
+        dataType: 'json',
+        type: "PUT",
+        data: JSON.stringify(				{
+            "userName": "yuan",
+            "password": "1234567",
+            "height": "190",
+            "createTime": "2018-12-12 12:11:11",
+            "modifyTime": "2018-12-12 12:11:11",
+            "deleteFlag": 2,
+            "sex": "1"
+        }),
+        success: function (data) {
+            console.log("SUCCESS : ", JSON.stringify(data));
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+
+
+}
+

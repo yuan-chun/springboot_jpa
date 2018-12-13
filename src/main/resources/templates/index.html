@@ -1,28 +1,5 @@
-<!--
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    &lt;!&ndash; 可以看到 thymeleaf 是通过在标签里添加额外属性来绑定动态数据的 &ndash;&gt;
-    <title th:text="${title}">Title</title>
-    &lt;!&ndash; 在/resources/static/js目录下创建一个hello.js 用如下语法依赖即可&ndash;&gt;
-    <script type="text/javascript" th:src="@{/js/index.js}"></script>
-    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
-    <script type="text/javascript" th:src="@{/js/jquery-2.0.3.min.js}"></script>
-</head>
-<body>
-<h1 th:text="${desc}">Hello World</h1>
-<h2>=====作者信息=====</h2>
-<p th:text="${author?.userName}"></p>
-<p th:text="${author?.height}"></p>
-<p th:text="${author?.password}"></p>
-</body>
-</html>-->
-
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <title>Spring Boot ajax example</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -31,53 +8,75 @@
     <script type="text/javascript" th:src="@{/js/ajaxindex.js}"></script>
 </head>
 <body>
+<!-- 不存在则忽略，显示hello null!(可以通过默认值进行设置)-->
+<p th:text="'Hello ' + (${name}?:'admin')">默认</p>
 
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">ThinkingInGIS</a>
+
+<div id="searchDiv">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3" style="margin-bottom: 10px;">
+                <span class="pull-left" style="height: 34px;line-height: 34px">用户名：</span>
+                <div style="margin-left:75px">
+                    <input type="text" id="userName" class="form-control"
+                           onafterpaste="must_num(this)"/>
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-bottom: 10px;">
+                <span class="pull-left" style="height: 34px;line-height: 34px">用户密码：</span>
+                <div style="margin-left:75px">
+                    <input type="text" id="password" class="form-control"
+                           onafterpaste="must_num(this)"/>
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-bottom: 10px;">
+                <span class="pull-left" style="height: 34px;line-height: 34px">身高：</span>
+                <div style="margin-left:75px">
+                    <input type="text" id="search-vId" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="margin-bottom: 10px;">
+                <span class="pull-left" style="height: 34px;line-height: 34px">性别：</span>
+                <div style="margin-left:75px">
+                    <select class="chosen-select form-control" id="search-category"
+                            data-placeholder="--请选择--">
+                        <option value="">--请选择--</option>
+                        <option value="1" select="checked">男</option>
+                        <option value="0">女</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-bottom: 10px;">
+                <span class="pull-left" style="height: 34px;line-height: 34px">生日：</span>
+                <div style="margin-left:75px; ">
+                    <input id="search-createTimeStart" type="text" class="form-control"/>
+                </div>
+            </div>
+            <div class="pull-right" style="margin-right: 10px;">
+
+                <button type="button" class="btn   btn-md" onclick="save()">
+                    <i class="ace-icon fa fa-repeat orange bigger-115"></i>
+                    <span style="text-shadow:none">保存</span>
+                </button>
+
+                <button type="button" class="btn   btn-md " id="searchBtn" onclick="queryByName()">
+                    <i class="ace-icon fa fa-search orange bigger-115"></i>
+                    <span style="text-shadow:none">搜索</span>
+                </button>
+
+                <button type="button" class="btn   btn-md " id="searchBtn" onclick="queryLikeName()">
+                    <i class="ace-icon fa fa-search orange bigger-115"></i>
+                    <span style="text-shadow:none">like搜索</span>
+                </button>
+            </div>
         </div>
     </div>
-</nav>
-
-<div class="container" style="min-height: 500px">
-
-    <div class="starter-template">
-        <h1>Spring Boot AJAX 示例</h1>
-
-        <div id="feedback"></div>
-
-        <form class="form-horizontal" id="search-form">
-            <div class="form-group form-group-lg">
-                <label class="col-sm-2 control-label">用户名</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="username"/>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" id="bth-search"
-                            onclick="fire_ajax_submit()"  class="btn btn-primary btn-lg">查询
-                    </button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-
-</div>
-
-<div class="container">
-    <footer>
-        <p>
-            © <a >ThinkingInGIS</a> 2017
-        </p>
-    </footer>
 </div>
 
 
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
     var local_web_root = /*[[@{/}]]*/ '';
     /*]]>*/
     if (local_web_root.endsWith("/") ) {
