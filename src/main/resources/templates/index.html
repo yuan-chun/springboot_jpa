@@ -1,0 +1,90 @@
+<!--
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    &lt;!&ndash; 可以看到 thymeleaf 是通过在标签里添加额外属性来绑定动态数据的 &ndash;&gt;
+    <title th:text="${title}">Title</title>
+    &lt;!&ndash; 在/resources/static/js目录下创建一个hello.js 用如下语法依赖即可&ndash;&gt;
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-2.0.3.min.js}"></script>
+</head>
+<body>
+<h1 th:text="${desc}">Hello World</h1>
+<h2>=====作者信息=====</h2>
+<p th:text="${author?.userName}"></p>
+<p th:text="${author?.height}"></p>
+<p th:text="${author?.password}"></p>
+</body>
+</html>-->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Spring Boot ajax example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script type="text/javascript" th:src="@{/js/jquery-2.0.3.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/ajaxindex.js}"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">ThinkingInGIS</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="min-height: 500px">
+
+    <div class="starter-template">
+        <h1>Spring Boot AJAX 示例</h1>
+
+        <div id="feedback"></div>
+
+        <form class="form-horizontal" id="search-form">
+            <div class="form-group form-group-lg">
+                <label class="col-sm-2 control-label">用户名</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="username"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" id="bth-search"
+                            onclick="fire_ajax_submit()"  class="btn btn-primary btn-lg">查询
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<div class="container">
+    <footer>
+        <p>
+            © <a >ThinkingInGIS</a> 2017
+        </p>
+    </footer>
+</div>
+
+
+<script type="text/javascript">
+    var local_web_root = /*[[@{/}]]*/ '';
+    /*]]>*/
+    if (local_web_root.endsWith("/") ) {
+        local_web_root = local_web_root.substring(0, local_web_root.length - 1);
+    }
+    console.info(local_web_root);
+
+</script>
+</body>
+</html>
