@@ -98,7 +98,6 @@ public class UserServiceImpl implements UserService {
 //                OR user0_.password LIKE ?
 //        )
         List<User> sUserList = userRepository.findAll(Specifications.where(s2).and(s2));
-
         //分页
         Pageable pageable = new PageRequest(0, 1, Sort.Direction.ASC, "id");
         Page<User> userPage = userRepository.findAll(Specifications.where(s1).and(s2),pageable);
