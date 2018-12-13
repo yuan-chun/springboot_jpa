@@ -45,6 +45,32 @@ function queryLikeName(){
 }
 
 
+function queryByPage(){
+    $.ajax({
+        // url: "http://localhost:13500/user/findByUserName",
+        url: local_web_root + "/user/findByPage",
+        async: false,
+        timeout: 3000,
+        dataType: 'json',//返回数据类型
+        type: "GET",//get对应data为对象
+        data:{
+            page: 3,
+            size: 3,
+            "user.userName":"yuan",
+            "user.id":8
+        },
+        success: function (data) {
+            console.log("SUCCESS : ", JSON.stringify(data));
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+
+
+}
+
+
 
 function save(){
     var search = {};

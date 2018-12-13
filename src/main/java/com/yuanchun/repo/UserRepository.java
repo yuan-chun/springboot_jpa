@@ -69,4 +69,7 @@ public interface UserRepository extends JpaRepository<User,Long> , JpaSpecificat
     @Modifying
     public List<User> selectByName(String name);
 
+
+
+
 }

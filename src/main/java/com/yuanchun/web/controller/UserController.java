@@ -3,6 +3,8 @@ package com.yuanchun.web.controller;
 import com.yuanchun.po.User;
 import com.yuanchun.service.inter.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +29,22 @@ public class UserController {
     public List<User> findLikeName(String userName){
         System.out.println("findByUserName user name"+userName);
         return userService.findLikeName(userName);
+    }
+
+
+
+    // 绑定变量名字和属性，参数封装进类
+    @InitBinder("user")
+    public void initBinderUser(WebDataBinder binder) {
+        binder.setFieldDefaultPrefix("user.");
+    }
+
+    @GetMapping("/findByPage")
+    @ResponseBody
+    public Page<User> findByPage(Integer page, Integer size,  @ModelAttribute("user")  User user, HttpServletRequest request){
+        System.out.println("findByUserName user name="+user.getUserName());
+        return userService.findCriteria(page,size,user);
+//        return userService.findNoCriteria(page,size);
     }
 
     @PutMapping("/save")
