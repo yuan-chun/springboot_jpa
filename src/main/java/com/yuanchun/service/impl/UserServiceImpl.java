@@ -33,8 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateSome() {
         Optional<User> osc = userRepository.findById(10L);
+        //利用 Optional 执行更新操作
         osc.get().setUserName("test2");
         osc.get().setHeight(100);
+
     }
 
     @Override
