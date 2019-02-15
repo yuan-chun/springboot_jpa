@@ -36,7 +36,6 @@ public class UserServiceImpl implements UserService {
         //利用 Optional 执行更新操作
         osc.get().setUserName("test2");
         osc.get().setHeight(100);
-
     }
 
     @Override
