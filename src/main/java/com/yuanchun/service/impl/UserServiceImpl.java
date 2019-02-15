@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -27,6 +28,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUserName(String userName) {
         return userRepository.findUserByUserName(userName);
+    }
+
+    @Override
+    public void updateSome() {
+        Optional<User> osc = userRepository.findById(10L);
+        osc.get().setUserName("test2");
+        osc.get().setHeight(100);
     }
 
     @Override
@@ -133,6 +141,8 @@ public class UserServiceImpl implements UserService {
         Page<User> pageList = userRepository.findAll(spec, pageable);
         return pageList;
     }
+
+
 
 
 }

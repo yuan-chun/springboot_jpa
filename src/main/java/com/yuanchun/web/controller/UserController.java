@@ -24,6 +24,12 @@ public class UserController {
         return userService.findByUserName(userName);
     }
 
+    @GetMapping("/updateSome")
+    @ResponseBody
+    public void updateSome( String userName){
+        userService.updateSome();
+    }
+
     @GetMapping("/findLikeName")
     @ResponseBody
     public List<User> findLikeName(String userName){

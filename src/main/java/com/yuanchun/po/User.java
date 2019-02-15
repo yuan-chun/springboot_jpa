@@ -3,6 +3,8 @@ package com.yuanchun.po;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NonNull;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name="test_user")
+@DynamicInsert
+@DynamicUpdate
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

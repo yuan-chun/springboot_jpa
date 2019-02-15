@@ -9,7 +9,7 @@ public interface UserService {
 
 
     User findByUserName(String userName);
-
+    public void updateSome();
     void save(User user);
 
     List<User> findLikeName(String userName);
